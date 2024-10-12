@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import ScrollerWrap from '@/components/layout/ScrollerWrap.vue'
-</script>
-
 <template>
   <main>
     <div class="p-4 md:p-10 lg:p-20">
@@ -31,28 +27,45 @@ import ScrollerWrap from '@/components/layout/ScrollerWrap.vue'
         </div>
       </div>
       <div class="mt-8">
-        <ScrollerWrap title="Tendências"></ScrollerWrap>
+        <ScrollerWrap title="Populares" :list="popularMovies"></ScrollerWrap>
       </div>
       <div class="mt-8">
-        <ScrollerWrap title="Populares"></ScrollerWrap>
+        <ScrollerWrap title="Tendencia" :list="trendingMovies"></ScrollerWrap>
       </div>
-
-      <!-- <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-8"
-      >
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-        <div><Cards /></div>
-      </div> -->
     </div>
   </main>
 </template>
+
+<script setup lang="ts">
+import { ref, watchEffect, computed } from 'vue'
+import { usePopularMovies, useTrendingMovies } from '@/composables/useMovies'
+import { useMovieStore } from '@/stores/moviesStore'
+import ScrollerWrap from '@/components/layout/ScrollerWrap.vue'
+
+const popularMoviesStore = useMovieStore()
+const trendingMoviesStore = useMovieStore()
+const page = ref(1)
+
+const {
+  data: popularData,
+  isLoading: popularLoading,
+  error: popularError
+} = usePopularMovies(page.value)
+const {
+  data: trendingData,
+  isLoading: trendingLoading,
+  error: trendingError
+} = useTrendingMovies(page.value)
+
+watchEffect(() => {
+  if (popularData.value) {
+    popularMoviesStore.savePopularMovies(popularData.value)
+  }
+  if (trendingData.value) {
+    trendingMoviesStore.saveTrendingMovies(trendingData.value)
+  }
+})
+
+const popularMovies = computed(() => popularData.value?.results || [])
+const trendingMovies = computed(() => trendingData.value?.results || [])
+</script>

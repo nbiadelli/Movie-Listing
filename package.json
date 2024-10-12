@@ -14,9 +14,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@tanstack/vue-query": "^5.59.6",
+    "@tanstack/vue-query": "^5.59.9",
+    "axios": "^1.7.7",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
+    "vue-query": "^1.26.0",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
