@@ -1,5 +1,6 @@
 import apiClient from './client'
 import type { MoviesResponse, CastResponse } from './movie.types'
+import { handleError } from '../composables/useMovies'
 
 export const getPopularMovies = async (page: number): Promise<MoviesResponse> => {
   try {
@@ -8,7 +9,9 @@ export const getPopularMovies = async (page: number): Promise<MoviesResponse> =>
     )
     return response.data
   } catch (error) {
-    throw (error as any).status
+    const status = (error as any).response?.status || 500
+    handleError(status)
+    throw error
   }
 }
 
@@ -17,7 +20,9 @@ export const getTrendingMovies = async (page: number): Promise<MoviesResponse> =
     const response = await apiClient.get(`/trending/movie/day?language=pt-BR&page=${page}`)
     return response.data
   } catch (error) {
-    throw (error as any).status
+    const status = (error as any).response?.status || 500
+    handleError(status)
+    throw error
   }
 }
 
@@ -26,7 +31,9 @@ export const getdetailsMovies = async (movie_id: string): Promise<MoviesResponse
     const response = await apiClient.get(`/movie/${movie_id}?language=pt-BR`)
     return response.data
   } catch (error) {
-    throw (error as any).status
+    const status = (error as any).response?.status || 500
+    handleError(status)
+    throw error
   }
 }
 
@@ -35,7 +42,9 @@ export const getCast = async (movie_id: string): Promise<CastResponse> => {
     const response = await apiClient.get(`/movie/${movie_id}/credits`)
     return response.data
   } catch (error) {
-    throw (error as any).status
+    const status = (error as any).response?.status || 500
+    handleError(status)
+    throw error
   }
 }
 
@@ -47,6 +56,8 @@ export const getSearch = async (search: string, page: number): Promise<MoviesRes
     )
     return response.data
   } catch (error) {
-    throw (error as any).status
+    const status = (error as any).response?.status || 500
+    handleError(status)
+    throw error
   }
 }

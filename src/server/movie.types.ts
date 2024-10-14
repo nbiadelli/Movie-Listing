@@ -4,11 +4,13 @@ export interface Movie {
   title: string
   vote_average: number
   release_date: string
-  overview: string
+  overview?: string
 }
 
 export interface MoviesResponse {
   results: Movie[]
+  total_pages: number
+  page: number
 }
 
 export interface CastDetails {
@@ -17,8 +19,8 @@ export interface CastDetails {
   profile_path: string
   character: string
 }
-;[]
 
 export interface CastResponse {
+  cast: []
   results: CastDetails[]
 }
