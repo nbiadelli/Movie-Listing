@@ -14,7 +14,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2, // Configuração de exemplo: tenta novamente 2 vezes se houver erro
-      refetchOnWindowFocus: false // Desabilita o refetch ao focar a janela
+      refetchOnWindowFocus: true // Desabilita o refetch ao focar a janela
     }
   }
 })

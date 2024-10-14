@@ -2,7 +2,7 @@
   <main>
     <div class="p-4 md:p-10 lg:p-20">
       <div
-        class="bg-[url('https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp')] h-64 w-full bg-cover bg-center flex flex-col justify-center items-center text-white"
+        class="bg-[url('https://png.pngtree.com/background/20230618/original/pngtree-blank-movie-ticket-with-popcorn-bucket-filmstrip-clapperboard-and-camera-in-picture-image_3709549.jpg')] h-64 w-full bg-cover bg-center flex flex-col justify-center items-center text-white"
       >
         <h1 class="text-3xl lg:text-5xl font-bold">Bem-Vindo(a).</h1>
         <h3 class="text-lg lg:text-xl mt-2">
@@ -10,27 +10,29 @@
         </h3>
         <div class="mt-4 w-full max-w-md">
           <label class="input input-bordered flex items-center gap-2">
-            <input type="text" class="grow p-2" placeholder="Search" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              class="h-4 w-4 opacity-70"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <input
+              type="text"
+              v-model="search"
+              class="grow p-2"
+              placeholder="Search"
+              @keyup.enter="redirectToAbout"
+            />
           </label>
         </div>
       </div>
-      <div class="mt-8">
-        <ScrollerWrap title="Populares" :list="popularMovies"></ScrollerWrap>
+      <div v-if="!popularLoading && !trendingLoading">
+        <div class="mt-8">
+          <ScrollerWrap title="Populares" :list="popularMovies"></ScrollerWrap>
+        </div>
+        <div class="mt-8">
+          <ScrollerWrap title="Tendencia" :list="trendingMovies"></ScrollerWrap>
+        </div>
       </div>
-      <div class="mt-8">
-        <ScrollerWrap title="Tendencia" :list="trendingMovies"></ScrollerWrap>
+      <div v-else class="mt-32 flex justify-center items-center">
+        <span class="loading loading-ball loading-xs"></span>
+        <span class="loading loading-ball loading-sm"></span>
+        <span class="loading loading-ball loading-md"></span>
+        <span class="loading loading-ball loading-lg"></span>
       </div>
     </div>
   </main>
@@ -38,13 +40,18 @@
 
 <script setup lang="ts">
 import { ref, watchEffect, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { usePopularMovies, useTrendingMovies } from '@/composables/useMovies'
 import { useMovieStore } from '@/stores/moviesStore'
 import ScrollerWrap from '@/components/layout/ScrollerWrap.vue'
+const route = useRoute()
+const router = useRouter()
 
 const popularMoviesStore = useMovieStore()
 const trendingMoviesStore = useMovieStore()
 const page = ref(1)
+
+const search = ref(route.query.search || '')
 
 const {
   data: popularData,
@@ -56,6 +63,12 @@ const {
   isLoading: trendingLoading,
   error: trendingError
 } = useTrendingMovies(page.value)
+
+function redirectToAbout() {
+  router.push(`/movie/search-result/${search.value}`)
+}
+
+search.value = route.query.search || ''
 
 watchEffect(() => {
   if (popularData.value) {
