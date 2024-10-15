@@ -1,9 +1,8 @@
-// RadialProgress.test.ts
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 import RadialProgress from '../shared/Progress.vue'
 
-describe('RadialProgress.vue', () => {
+describe('RadialProgress', () => {
   it('renders the correct percentage based on acceptance', () => {
     const wrapper = mount(RadialProgress, {
       props: {
@@ -23,7 +22,6 @@ describe('RadialProgress.vue', () => {
 
     expect(wrapper.text()).toContain('70%')
 
-    // Update the prop
     await wrapper.setProps({ acceptance: 8.2 })
     expect(wrapper.text()).toContain('82%')
   })
