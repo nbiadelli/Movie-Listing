@@ -1,45 +1,51 @@
-# movie-listing
+# Listagem de Filmes
 
-This template should help get you started developing with Vue 3 in Vite.
+## Descrição
 
-## Recommended IDE Setup
+Este projeto apresenta uma lista dos filmes mais populares e das principais tendências do momento, permitindo visualizar detalhes de cada um e realizar sua própria pesquisa para encontrar seu filme favorito.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Tecnologias Utilizadas
 
-## Type Support for `.vue` Imports in TS
+### Vue 3
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Framework para construir interfaces de usuário.
 
-## Customize configuration
+### Tailwind CSS
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Framework CSS para design rápido e responsivo.
 
-## Project Setup
+### TypeScript
 
-```sh
+Superset de JavaScript que adiciona tipagem estática.
+
+### Vitest
+
+Para testes unitário.
+
+### Gerenciameto de estados
+
+Não considerei necessário implementar Vuex ou Pinia, já que o projeto é simples e a comunicação entre os componentes pode ser feita de forma eficiente usando props para passar dados do pai para o filho, sem precisar de um gerenciamento global de estado.
+
+### Dependências
+
+Certifique-se de ter Node.js instalado na sua máquina (recomenda-se a versão > 16).
+
+
+### Instalação
+
 npm install
-```
 
-### Compile and Hot-Reload for Development
+### Executando o projeto
 
-```sh
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+#### Executando o testes
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
 npm run test:unit
-```
 
-### Lint with [ESLint](https://eslint.org/)
 
-```sh
-npm run lint
-```
+### Acesso pelo seu navegador no endereço:
+
+http://localhost:3000
+
+
