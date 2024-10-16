@@ -1,13 +1,10 @@
 @import './base.css';
 
 #app {
-  /* max-width: 1280px; */
   margin: 0 auto;
   font-weight: normal;
 }
 
 body {
   width: 100%;
-
-  /* place-items: center; */
 }
