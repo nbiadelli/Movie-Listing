@@ -13,7 +13,7 @@
                 <figure v-if="item.poster_path" class="h-80">
                   <img
                     v-if="item.poster_path"
-                    class="w-72"
+                    class="object-contain h-full w-auto"
                     :src="`${baseURL}${item.poster_path}`"
                     alt="Movie"
                     loading="lazy"
@@ -22,7 +22,7 @@
                 </figure>
                 <figure v-else class="h-80">
                   <img
-                    class="p-4 w-72"
+                    class="object-contain h-full w-[14.05rem]"
                     src="../assets/img/skeleton.svg"
                     alt="Movie"
                     loading="lazy"

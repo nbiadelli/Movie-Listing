@@ -5,7 +5,7 @@
         class="bg-[url('assets/img/banner.png')] h-64 w-full bg-cover bg-center flex flex-col justify-center items-center text-white"
       >
         <h1 class="text-3xl lg:text-5xl font-bold">Bem-Vindo(a).</h1>
-        <h3 class="text-lg lg:text-xl md:place-items-center mt-2 font-bold">
+        <h3 class="text-lg text-center mt-2 font-bold">
           Milhões de Filmes para Descobrir. Explore já.
         </h3>
         <div class="mt-4 w-full max-w-md">
